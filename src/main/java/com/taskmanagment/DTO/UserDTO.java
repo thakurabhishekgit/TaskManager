@@ -3,11 +3,15 @@ package com.taskmanagment.DTO;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@Data
 public class UserDTO {
     private Long id;
 
@@ -23,7 +27,7 @@ public class UserDTO {
     private String role;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 6, max = 20, message = "Password must be between 6 and 20 characters")
+    @Size(min = 6, max = 70, message = "Password must be between 6 and 20 characters")
     private String password;
 
     public UserDTO(Long id, String name, String email, String role) {
