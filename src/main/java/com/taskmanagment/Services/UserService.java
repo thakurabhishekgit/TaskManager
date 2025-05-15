@@ -10,6 +10,9 @@ import com.taskmanagment.DTO.UserDTO;
 import com.taskmanagment.Entity.User;
 import com.taskmanagment.Entity.User.Role;
 import com.taskmanagment.Repository.UserRepository;
+import com.taskmanagment.utils.JwtUtil;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -20,14 +23,14 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public User createUser(UserDTO userDTO) {
+    @Transactional
+    public UserDTO createUser(UserDTO userDTO) {
 
         User user = new User();
 
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
 
-        // Convert role string to enum with uppercase (handle invalid role)
         try {
             Role roleEnum = Role.valueOf(userDTO.getRole().toUpperCase());
             user.setRole(roleEnum);
@@ -36,10 +39,21 @@ public class UserService {
                     "Invalid role: " + userDTO.getRole() + ". Allowed roles: EMPLOYEE, ADMIN, MANAGER");
         }
 
-        // Encode the password
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        return userRepository.save(user);
+        user = userRepository.save(user);
+
+        String token = JwtUtil.generateToken(user.getEmail());
+
+        UserDTO responseDTO = new UserDTO();
+        responseDTO.setId(user.getId());
+        responseDTO.setName(user.getName());
+        responseDTO.setEmail(user.getEmail());
+        responseDTO.setRole(user.getRole().name());
+        responseDTO.setPassword(user.getPassword());
+        responseDTO.setToken(token);
+
+        return responseDTO;
     }
 
     public List<User> getAllUsers() {

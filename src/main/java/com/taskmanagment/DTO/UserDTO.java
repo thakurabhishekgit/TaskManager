@@ -1,5 +1,7 @@
 package com.taskmanagment.DTO;
 
+import java.util.List;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,19 +31,22 @@ public class UserDTO {
     @NotBlank(message = "Password is required")
     @Size(min = 6, max = 70, message = "Password must be between 6 and 20 characters")
     private String password;
+    String token;
 
     public UserDTO(Long id, String name, String email, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
+
     }
 
-    public UserDTO(Long id, String name, String email, String role, String password) {
+    public UserDTO(Long id, String name, String email, String role, String password, String token) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
         this.password = password;
+        this.token = token;
     }
 }
