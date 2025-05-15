@@ -2,6 +2,8 @@ package com.taskmanagment.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -44,9 +46,10 @@ public class User {
         MANAGER
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "assignedTo")
     private List<Task> tasksAssignedToMe;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "assignedBy")
     private List<Task> tasksAssignedByMe;
 

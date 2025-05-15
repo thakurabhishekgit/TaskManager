@@ -2,14 +2,24 @@ package com.taskmanagment.DTO;
 
 import com.taskmanagment.Entity.User;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@Data
 public class TaskDTO {
     private Long id;
     private String description;
+
+    // For input
+    private Long assignedToId;
+    private Long assignedById;
+
+    // For output
     private UserDTO assignedTo;
     private UserDTO assignedBy;
 
@@ -21,6 +31,4 @@ public class TaskDTO {
         this.assignedBy = new UserDTO(assignedBy.getId(), assignedBy.getName(), assignedBy.getEmail(),
                 assignedBy.getRole().toString());
     }
-
-    // getters and setters
 }
