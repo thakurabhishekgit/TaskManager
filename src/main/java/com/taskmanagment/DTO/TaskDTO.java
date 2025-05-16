@@ -1,5 +1,7 @@
 package com.taskmanagment.DTO;
 
+import java.util.UUID;
+
 import com.taskmanagment.Entity.User;
 
 import lombok.Data;
@@ -16,8 +18,8 @@ public class TaskDTO {
     private String description;
 
     // For input
-    private Long assignedToId;
-    private Long assignedById;
+    private UUID assignedToId;
+    private UUID assignedById;
 
     // For output
     private UserDTO assignedTo;

@@ -2,6 +2,7 @@ package com.taskmanagment.Services;
 
 import java.util.List;
 
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class TaskService {
     }
 
     @Transactional
-    public List<Task> getTaskAssigenedByUser(Long userId) {
+    public List<Task> getTaskAssigenedByUser(UUID userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             throw new RuntimeException("User not found");
@@ -54,7 +55,7 @@ public class TaskService {
     }
 
     @Transactional
-    public List<Task> getMyTasks(Long id) {
+    public List<Task> getMyTasks(UUID id) {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new RuntimeException("User not found");

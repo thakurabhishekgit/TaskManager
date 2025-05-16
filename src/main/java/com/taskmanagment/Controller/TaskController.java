@@ -1,7 +1,7 @@
 package com.taskmanagment.Controller;
 
 import java.util.List;
-
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +44,12 @@ public class TaskController {
     }
 
     @GetMapping("/getTaskAssigenedByUser/{userId}")
-    public ResponseEntity<List<Task>> getTaskAssigenedByUser(@PathVariable Long userId) {
+    public ResponseEntity<List<Task>> getTaskAssigenedByUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(taskService.getTaskAssigenedByUser(userId));
     }
 
     @GetMapping("/getMyTasks/{userId}")
-    public ResponseEntity<List<Task>> getMyTaskss(@PathVariable Long userId) {
+    public ResponseEntity<List<Task>> getMyTaskss(@PathVariable UUID userId) {
         return ResponseEntity.ok(taskService.getMyTasks(userId));
     }
 
