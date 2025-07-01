@@ -21,7 +21,6 @@ public class JwtUtil {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
-
     public static String extractEmail(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
